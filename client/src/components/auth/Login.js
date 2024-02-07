@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+ import * as Yup from 'yup';
 
 const Login = ({ history }) => {
 
@@ -31,26 +33,37 @@ const Login = ({ history }) => {
   return (
     <div className="login">
       <h2 className="page-header">Login</h2>
-      <form onSubmit={onSubmit}>
-        <TextFieldGroup
-          label="username"
-          name="username"
-          placeholder="Enter your username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          error={errors.username}
-        />
-        <TextFieldGroup
-          label="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          error={errors.password}
-        />
-        <input type="submit" className="btn btn-info" value="Login" />
-      </form>
+      <Formik
+       initialValues={{ username: '', password: ''}}
+       validationSchema={Yup.object({
+         username: Yup.string()
+           .required('Required'),
+         password: Yup.string()
+           .required('Required'),
+       })}
+       onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(true);
+        const {username, password} = values
+        const user = {
+          username,
+          password
+        };
+        dispatch(loginUser(user, history))
+        setSubmitting(false);
+       }}
+     >
+       <Form>
+         <label htmlFor="username">username</label>
+         <Field name="username" className="form-control" type="text" placeholder="Enter your name" />
+         <ErrorMessage name="username" /><br />
+ 
+         <label htmlFor="password">password</label>
+         <Field name="password" className="form-control" type="password" placeholder="Enter your password" />
+         <ErrorMessage name="password" /><br />
+ 
+         <button type="submit" className="btn btn-info">Login</button>
+       </Form>
+     </Formik>
     </div >
   )
 }
