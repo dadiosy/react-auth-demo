@@ -36,64 +36,61 @@ const Register = ({ history }) => {
 
   return (
     <div className="register">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 m-auto">
-            <h1 className="display-4 text-center">Sign Up</h1>
-            <p className="lead text-center">
-              Create your account
-            </p>
-            <form noValidate onSubmit={onSubmit}>
-              <TextFieldGroup
-                name="name"
-                placeholder="person"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                error={errors.name}
-              />
-              <TextFieldGroup
-                name="username"
-                placeholder="username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                error={errors.name}
-              />
-              <TextFieldGroup
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                error={errors.email}
-              />
-              <TextFieldGroup
-                name="contact"
-                placeholder="contact"
-                value={contact}
-                onChange={e => setContact(e.target.value)}
-                error={errors.contact}
-              />
-              <TextFieldGroup
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                error={errors.password}
-              />
-              <TextFieldGroup
-                name="password2"
-                type="password"
-                placeholder="Confirm password"
-                value={password2}
-                onChange={e => setPassword2(e.target.value)}
-                error={errors.password2}
-              />
-              <input type="submit" className="btn btn-info btn-block mt-4" />
-            </form>
-          </div>
-        </div>
-      </div>
+      <h2 className="page-header">Register</h2>
+      <form noValidate onSubmit={onSubmit}>
+        <TextFieldGroup
+          label="name"
+          name="name"
+          placeholder="Enter your name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          error={errors.name}
+        />
+        <TextFieldGroup
+          label="Contact-Number"
+          name="contact"
+          placeholder="Enter your contact number"
+          value={contact}
+          onChange={e => setContact(e.target.value)}
+          error={errors.contact}
+        />
+        <TextFieldGroup
+          label="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          error={errors.email}
+        />
+        <TextFieldGroup
+          label="username"
+          name="username"
+          placeholder="Enter your username"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          error={errors.name}
+        />
+        <TextFieldGroup
+          label="password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          error={errors.password}
+        />
+        <TextFieldGroup
+          label="Confirm Password"
+          name="password2"
+          type="password"
+          placeholder="Confirm password"
+          value={password2}
+          onChange={e => setPassword2(e.target.value)}
+          error={errors.password2}
+        />
+        <input type="submit" className="btn btn-info" value="Register" />
+      </form>
     </div>
   )
 }
