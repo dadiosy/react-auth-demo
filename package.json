@@ -2,6 +2,10 @@
   "name": "portal-login",
   "version": "1.0.0",
   "description": "portal-login",
+  "enginee": {
+    "node": "18.14.2",
+    "npm": "9.5.0"
+  },
   "main": "server.js",
   "scripts": {
     "start-prod": "cross-env NODE_ENV=production node server",
