@@ -4,14 +4,12 @@
   "description": "portal-login",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
     "start-prod": "cross-env NODE_ENV=production node server",
     "start": "node server",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" ",
-    "deploy-install": "npm install && npm run client-install",
-    "deploy-build": "npm run build --prefix client"
+    "deploy-build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "roberto",
