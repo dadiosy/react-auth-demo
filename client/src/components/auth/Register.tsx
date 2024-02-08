@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { registerUser } from "../../actions/authActions";
-import TextFieldGroup from "../common/TextFieldGroup";
+import React, { useEffect } from "react";
+import { registerUser } from "../../reducers/authSlice.ts";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useAppSelector, useAppDispatch } from "../../hooks.ts";
 
 const Register = ({ history }) => {
-  const auth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const auth = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (auth.isAuthenticated) {

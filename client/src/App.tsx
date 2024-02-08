@@ -1,23 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
-import NotFound from "./components/not-found/NotFound";
+import setAuthToken from "./utils/setAuthToken.ts";
+import { setCurrentUser, logoutUser } from "./reducers/authSlice.ts";
+import NotFound from "./components/not-found/NotFound.tsx";
 import { Provider } from "react-redux";
 
-import PrivateRoute from "./components/common/PrivateRoute";
+import PrivateRoute from "./components/common/PrivateRoute.tsx";
 
-import Navbar from "./components/layout/Navbar";
-import Landing from "./components/layout/Landing";
+import Navbar from "./components/layout/Navbar.tsx";
+import Landing from "./components/layout/Landing.tsx";
 
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import Dashboard from "./components/dashboard/Dashboard";
+import Register from "./components/auth/Register.tsx";
+import Login from "./components/auth/Login.tsx";
+import Dashboard from "./components/dashboard/Dashboard.tsx";
 
-import store from "./store";
+import { store } from "./store.ts";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -55,7 +55,7 @@ const App = () => {
         </div>
       </Router>
     </Provider>
-  )
-}
+  );
+};
 
 export default App;

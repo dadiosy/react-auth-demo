@@ -1,29 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import { useAppSelector, useAppDispatch } from "../../hooks.ts";
+import { logoutUser } from "../../reducers/authSlice.ts";
 
 const Navbar = () => {
-  const auth = useSelector(state => state.auth)
+  const auth = useAppSelector((state) => state.auth);
   const { isAuthenticated, user } = auth;
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
 
   const onLogoutClick = (e) => {
-    e.preventDefault()
-    dispatch(logoutUser())
-  }
+    e.preventDefault();
+    dispatch(logoutUser());
+  };
 
   const authLinks = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-        Hello {user.name}
-      </li>
-      <li className="nav-item">
-        <a
-          href=""
-          onClick={onLogoutClick}
-          className="nav-link"
-        >
+        <a href="" onClick={onLogoutClick} className="nav-link">
           Logout
         </a>
       </li>
@@ -65,6 +58,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
