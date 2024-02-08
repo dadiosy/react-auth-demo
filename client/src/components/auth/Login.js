@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../actions/authActions";
-import TextFieldGroup from "../common/TextFieldGroup";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
  import * as Yup from 'yup';
 
 const Login = ({ history }) => {
 
   const auth = useSelector(state => state.auth)
-  const errors = useSelector(state => state.errors)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -18,17 +14,6 @@ const Login = ({ history }) => {
       history.push("/");
     }
   }, [])
-
-  const onSubmit = e => {
-    e.preventDefault();
-
-    const user = {
-      username,
-      password
-    };
-
-    dispatch(loginUser(user, history))
-  };
 
   return (
     <div className="login">
