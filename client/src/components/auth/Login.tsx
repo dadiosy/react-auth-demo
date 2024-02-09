@@ -21,7 +21,9 @@ const Login = ({ history }) => {
         initialValues={{ username: "", password: "" }}
         validationSchema={Yup.object({
           username: Yup.string().required("Required"),
-          password: Yup.string().required("Required"),
+          password: Yup.string()
+            .min(6, "Password must be at least 6 characters")
+            .required("Required"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
@@ -34,31 +36,41 @@ const Login = ({ history }) => {
           setSubmitting(false);
         }}
       >
-        <Form>
-          <label htmlFor="username">username</label>
-          <Field
-            name="username"
-            className="form-control"
-            type="text"
-            placeholder="Enter your name"
-          />
-          <ErrorMessage name="username" />
-          <br />
+        {({ isSubmitting, errors, handleSubmit }) => (
+          <Form>
+            <label htmlFor="username">username</label>
+            <Field
+              name="username"
+              className={
+                errors.username ? "form-control error" : "form-control"
+              }
+              type="text"
+              placeholder="Enter your name"
+            />
+            <div className="text-danger">
+              <ErrorMessage name="username" />
+            </div>
+            <br />
 
-          <label htmlFor="password">password</label>
-          <Field
-            name="password"
-            className="form-control"
-            type="password"
-            placeholder="Enter your password"
-          />
-          <ErrorMessage name="password" />
-          <br />
+            <label htmlFor="password">password</label>
+            <Field
+              name="password"
+              className={
+                errors.password ? "form-control error" : "form-control"
+              }
+              type="password"
+              placeholder="Enter your password"
+            />
+            <div className="text-danger">
+              <ErrorMessage name="password" />
+            </div>
+            <br />
 
-          <button type="submit" className="btn btn-info">
-            Login
-          </button>
-        </Form>
+            <button type="submit" className="btn btn-info">
+              Login
+            </button>
+          </Form>
+        )}
       </Formik>
     </div>
   );
