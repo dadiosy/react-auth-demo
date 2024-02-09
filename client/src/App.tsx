@@ -5,7 +5,8 @@ import setAuthToken from "./utils/setAuthToken.ts";
 import { setCurrentUser, logoutUser } from "./reducers/authSlice.ts";
 import NotFound from "./components/not-found/NotFound.tsx";
 import { Provider } from "react-redux";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/common/PrivateRoute.tsx";
 
 import Navbar from "./components/layout/Navbar.tsx";
@@ -54,6 +55,7 @@ const App = () => {
           <Route exact path="/not-found" component={NotFound} />
         </div>
       </Router>
+      <ToastContainer />
     </Provider>
   );
 };

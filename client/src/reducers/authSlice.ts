@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken.ts";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 export interface authState {
   isAuthenticated: Boolean;
@@ -28,29 +29,41 @@ const authSlice = createSlice({
 export const { setCurrentUser } = authSlice.actions;
 
 export const loginUser = (userData, history) => (dispatch) => {
-  axios.post("/api/users/login", userData).then((res) => {
-    // Save to localstorage
-    const { token } = res.data;
+  axios
+    .post("/api/users/login", userData)
+    .then((res) => {
+      // Save to localstorage
+      const { token } = res.data;
 
-    // Set token to localstorage
-    localStorage.setItem("jwtToken", token);
+      // Set token to localstorage
+      localStorage.setItem("jwtToken", token);
 
-    // Set token to Auth header
-    setAuthToken(token);
+      // Set token to Auth header
+      setAuthToken(token);
 
-    // Decode token to get user data
-    const decoded = jwt_decode(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
 
-    // Set current user
-    dispatch(setCurrentUser(decoded));
-    history.push("/dashboard");
-  });
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+      history.push("/dashboard");
+    })
+    .catch((err) => {
+      Object.keys(err.response.data).forEach((key) => {
+        toast.error(err.response.data[key]);
+      });
+    });
 };
 
 export const registerUser = (userData, history) => () => {
   axios
     .post("/api/users/register", userData)
-    .then((res) => history.push("/login"));
+    .then((res) => history.push("/login"))
+    .catch((err) => {
+      Object.keys(err.response.data).forEach((key) => {
+        toast.error(err.response.data[key]);
+      });
+    });
 };
 
 export const logoutUser = () => (dispatch) => {
